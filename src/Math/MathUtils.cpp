@@ -261,3 +261,14 @@ Matriz CalcInvMatriz(const Matriz& A)
 
 	return Matriz(res, A.cNumLinhas, A.cNumColunas);
 }
+
+double CalculaNormaVetor(const Matriz& V)
+{
+	double res = 0.0;
+	for(size_t i = 0; i < V.cNumLinhas; i++)
+	{
+		res += V.cMatriz[i] *V.cMatriz[i];
+	}
+
+	return sqrt(res);
+}

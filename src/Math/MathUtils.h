@@ -25,6 +25,8 @@ Matriz ResSistLinearPALU(const Matriz& A, const Matriz& b);
 
 Matriz CalcInvMatriz(const Matriz& A);
 
+double CalculaNormaVetor(const Matriz& V);
+
 // Fun��o auxiliar que troca linhas em uma matriz
 void TrocaLinha(Matriz& m, size_t l1, size_t l2);
 
