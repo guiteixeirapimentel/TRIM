@@ -1,9 +1,7 @@
-#ifndef F1_H
-#define F1_H
+#ifndef FTRIM1_H
+#define FTRIM1_H
 #include "XForce.h"
 #include "ThrustForce.h"
-#include "State.h"
-#include "StateDot.h"
 
 #include "Alfa.h"
 #include "AlfaDot.h"

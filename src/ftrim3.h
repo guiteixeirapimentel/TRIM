@@ -1,5 +1,5 @@
-#ifndef F3_H
-#define F3_H
+#ifndef FTRIM3_H
+#define FTRIM3_H
 #include "YMoment.h"
 #include "State.h"
 #include "StateDot.h"

@@ -1,5 +1,5 @@
-#ifndef F4_H
-#define F4_H
+#ifndef FTRIM4_H
+#define FTRIM4_H
 #include "State.h"
 #include "StateDot.h"
 #include "MultiVarFunction.h"

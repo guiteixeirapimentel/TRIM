@@ -1,8 +1,7 @@
-#ifndef F2_H
-#define F2_H
+#ifndef FTRIM2_H
+#define FTRIM2_H
+
 #include "ZForce.h"
-#include "State.h"
-#include "StateDot.h"
 
 
 class ftrim2 : public MultiVarFunction
