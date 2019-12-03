@@ -17,8 +17,8 @@ Matriz::Matriz(std::vector<double>&& M, size_t numLinhas, size_t numColunas)
 Matriz::Matriz()
 :
 cMatriz({}),
-cNumColunas(0),
-cNumLinhas(0)
+cNumLinhas(0),
+cNumColunas(0)
 {}
 
 Matriz Matriz::Transposta() const
