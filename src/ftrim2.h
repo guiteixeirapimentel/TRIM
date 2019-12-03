@@ -21,7 +21,6 @@ public:
         const double V = args[10];
         const double dynPress = 0.5 * cRho * (V*V);
 
-        const double alfa = args[11];
         const double alfadothat = args[12]*cMeanChord/(2.0*V);
         const double qhat = args[2]*cMeanChord/(2.0*V);
 

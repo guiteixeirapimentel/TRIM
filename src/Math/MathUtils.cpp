@@ -111,7 +111,7 @@ void DecompPALU(const Matriz& A, Matriz& POut, Matriz& LOut, Matriz& UOut)
 
 	std::vector<double>& L = ML.cMatriz;
 	std::vector<double>& U = MU.cMatriz;
-	std::vector<double>& P = MP.cMatriz;
+	//std::vector<double>& P = MP.cMatriz;
 
 
 	for (size_t k = 0; k < n; k++)
@@ -121,7 +121,7 @@ void DecompPALU(const Matriz& A, Matriz& POut, Matriz& LOut, Matriz& UOut)
 		TrocaLinha(MP, k, ipiv);
 		TrocaLinha(ML, k, ipiv);
 
-		for (size_t j = k + 1; j < n; j++)
+		for (size_t j = k + 1; j < m; j++)
 		{
 			L[k + (j * ML.cNumColunas)] = U[k + (j * MU.cNumColunas)] / U[k + (k * MU.cNumColunas)];
 			for (size_t index = k; index < n; index++)
@@ -179,11 +179,7 @@ size_t AchaIndicePivo(const Matriz& m, size_t nColuna, size_t nLinInicial)
 	size_t res = 0;
 	double maior = 0.0;
 	for (size_t i = nLinInicial; i < m.cNumLinhas; ++i)
-	{
-		if (nLinInicial == m.cNumColunas)
-		{
-			int x = 0;
-		}
+	{		
 		const double val = fabs(m.cMatriz[nColuna + (i * m.cNumColunas)]);
 
 		if (val > maior)

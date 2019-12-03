@@ -43,6 +43,6 @@ public:
 	}
 public:
 	std::vector<double> cMatriz;
-	size_t cNumLinhas;
 	size_t cNumColunas;
+	size_t cNumLinhas;
 };
