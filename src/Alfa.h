@@ -1,16 +1,17 @@
 #ifndef ALFA_H
 #define ALFA_H
-#include <cmath>
+#include "MultiVarFunction.h"
 
-class Alfa
+class Alfa : public MultiVarFunction
 {
 public:
-    Alfa(){};
+    Alfa():MultiVarFunction(2){};
     ~Alfa(){};
 
-    double operator() (double u, double w) const
+    // 0 -> u; 1 -> w;
+    double operator() (const std::vector<double>& args) const override
     {
-        return atan2(w, sqrt((w*w)+(u*u)));
+        return atan2(args[1], sqrt((args[1]*args[1])+(args[0]*args[0])));
     }
 };
 

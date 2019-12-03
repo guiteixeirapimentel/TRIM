@@ -1,19 +1,21 @@
 #ifndef THRUSTFORCE_H
 #define THRUSTFORCE_H
+#include "MultiVarFunction.h"
 
-class ThrustForce
+class ThrustForce : public MultiVarFunction
 {
 public:
-    ThrustForce(double value):cValue(value){}
-    ~ThrustForce(){}
-
-    inline double operator() () const
+    ThrustForce(double valueMax):MultiVarFunction(2),cValueMax(valueMax){};
+    ~ThrustForce(){};
+    
+    // 0 -> velocity; 1 -> deltaT
+    inline double operator() (const std::vector<double>& args) const override
     {
-        return cValue;
+        return (cValueMax* args[1])/args[0];
     }
 
 private:
-    const double cValue;
+    const double cValueMax;
 };
 
 #endif

@@ -1,19 +1,21 @@
 #ifndef ALFADOT_H
 #define ALFADOT_H
-#include <cmath>
+#include "MultiVarFunction.h"
 
-class AlfaDot
+class AlfaDot : public MultiVarFunction
 {
 public:
-    AlfaDot(){};
+    AlfaDot(): MultiVarFunction(4){};
     ~AlfaDot(){};
 
-    double operator() (double u, double w, double udot, double wdot) const
+    // 0 -> u; 1 -> w; 2 -> udot; 3 -> wdot;
+    double operator() (const std::vector<double>& args) const override
     {
-        const double V = sqrt((u*u)+(w*w));
+        const double V = sqrt((args[0]*args[0])+(args[1]*args[1]));
 
-        return ((wdot/V) - ((w*((u*udot) + (w*wdot))/pow((u*u)+(w*w), 1.5)))) / 
-        (1 + ((w*w)/((w*w)+(u*u))));
+        return ((args[3]/V) - ((args[1]*((args[0]*args[2]) + (args[1]*args[3]))/
+        pow((args[0]*args[0])+(args[1]*args[1]), 1.5)))) / 
+        (1 + ((args[1]*args[1])/((args[1]*args[1])+(args[0]*args[0]))));
     }
 };
 

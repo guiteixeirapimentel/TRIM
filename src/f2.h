@@ -150,6 +150,17 @@ public:
 
         return res;
     }
+
+    double JacobianU2(double meanchord,
+    const State& Xref, const StateDot& Xdotref, double massref, double deltaEref) const
+    {
+        //double delta = 1e-10;        
+        //double res = operator()(meanchord, Xref, Xdotref, massref, deltaEref)- 
+        //operator()(meanchord, Xref, Xdotref, massref, deltaEref);
+        //res /= delta;  
+
+        return 0.0;//res;
+    }
     
 private:
     const ZForce cZ;

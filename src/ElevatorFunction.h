@@ -2,17 +2,17 @@
 #define ELEVATORFUNCTION_H
 #define _USE_MATH_DEFINES_
 #define _USE_MATH_DEFINES
-#include <cmath>
+#include "MultiVarFunction.h"
 
-class ElevatorFunction
+class ElevatorFunction : public MultiVarFunction
 {
 public:
-    ElevatorFunction(){}
+    ElevatorFunction():MultiVarFunction(1){}
     ~ElevatorFunction(){};
 
-    double operator() (double t) const
+    double operator() (const std::vector<double>& t) const override
     {
-        if(t >= 1.0 && t <= 2.0)
+        if(t[0] >= 1.0 && t[0] <= 2.0)
         {
             return UMGRAU;
         }

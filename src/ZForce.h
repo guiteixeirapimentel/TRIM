@@ -2,21 +2,23 @@
 #define ZFORCE_H
 #include "AerodynamicCoefficients/LiftCoefficient.h"
 #include "AerodynamicCoefficients/DragCoefficient.h"
-#include <cmath>
 
-class ZForce
+class ZForce : public MultiVarFunction
 {
 public:
     ZForce(LiftCoefficient liftCoeff, DragCoefficient dragCoeff)
     :
-    cCL(liftCoeff),cCD(dragCoeff){}
+    MultiVarFunction(6),cCL(liftCoeff),cCD(dragCoeff){}
     ~ZForce(){}
 
-    inline double operator() (double alfa, double alfadothat, double qhat, double deltaE,
-     double dynamicPressure, double S) const
+    // 0->alfa; 1->alfadothat; 2->qhat; 3->deltaE; 4->dynamicPressure; 5->S;
+    inline double operator() (const std::vector<double>& args) const override
     {
-        return dynamicPressure*S*(
-            (-cCL(alfa, alfadothat, qhat, deltaE)*cos(alfa)) - (cCD(alfa)*sin(alfa)));
+        const double CL = cCL(args);
+        const double CD = cCD({CL});
+
+        return args[4]*args[5]*(
+            (-CL*cos(args[0])) - (CD*sin(args[0])));
     }
 
 private:

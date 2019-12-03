@@ -2,21 +2,21 @@
 #define XFORCE_H
 #include "AerodynamicCoefficients/LiftCoefficient.h"
 #include "AerodynamicCoefficients/DragCoefficient.h"
-#include <cmath>
 
-class XForce
+class XForce : public MultiVarFunction
 {
 public:
-    XForce(LiftCoefficient liftCoeff, DragCoefficient dragCoeff)
+    XForce(LiftCoefficient liftCoeff, DragCoefficient dragCoeff) 
     :
-    cCL(liftCoeff),cCD(dragCoeff){}
+    MultiVarFunction(6),cCL(liftCoeff),cCD(dragCoeff){}
     ~XForce(){}
 
-    inline double operator() (double alfa, double alfadothat, double qhat, double deltaE,
-     double dynamicPressure, double S) const
+    // 0->alfa; 1->alfadothat; 2->qhat; 3->deltaE; 4->dynamicPressure; 5->S;
+    inline double operator() (const std::vector<double>& args) const override
     {
-        return dynamicPressure*S*(
-            (cCL(alfa, alfadothat, qhat, deltaE)*sin(alfa)) - (cCD(alfa)*cos(alfa)));
+        const double CL = cCL(args);
+        const double CD = cCD({CL});
+        return args[4]*args[5]*((CL*sin(args[0])) - (CD*cos(args[0])));
     }
 
 private:

@@ -1,11 +1,13 @@
 #ifndef MOMENTCOEFFICIENT_H
 #define MOMENTCOEFFICIENT_H
+#include "../MultiVarFunction.h"
 
-class MomentCoefficient
+class MomentCoefficient : public MultiVarFunction
 {
 public:
     MomentCoefficient(double CM0, double CMAlfa, double CMAlfadot, double CMq, double CMdeltaE)
     :
+    MultiVarFunction(4),
     cCM0(CM0),
     cCMAlfa(CMAlfa),
     cCMAlfadot(CMAlfadot),
@@ -14,10 +16,11 @@ public:
 
     ~MomentCoefficient(){}
 
-    inline double operator() (double alfa, double alfadothat, double qhat, double deltae) const
+    // 0 -> alfa; 1 -> alfdothat; 2 -> qhat; 3 -> deltae;
+    inline double operator() (const std::vector<double>& args) const override
     {
-        return cCM0 + (alfa*cCMAlfa)+(cCMAlfadot*alfadothat) + (cCMQ*qhat)+
-        (cCMDeltaE*deltae);
+        return cCM0 + (args[0]*cCMAlfa)+(cCMAlfadot*args[1]) + (cCMQ*args[2])+
+        (cCMDeltaE*args[3]);
     }
 
 private:

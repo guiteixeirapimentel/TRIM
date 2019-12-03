@@ -5,14 +5,13 @@ class StateDot
 {
 public:
     StateDot(double udot, double wdot, double qdot, double thetadot)
-    :udot(udot), wdot(wdot), qdot(qdot), thetadot(thetadot){};
+    {cStatesDot.resize(4); cStatesDot[0] = udot; cStatesDot[1] = wdot; 
+    cStatesDot[2] = qdot; cStatesDot[3] = thetadot;};
     ~StateDot(){};
 
 public:
-    double udot;
-    double wdot;
-    double qdot;
-    double thetadot;
+    // 0->u; 1->w; 2->q; 3->theta;
+    std::vector<double> cStatesDot;
 };
 
 #endif

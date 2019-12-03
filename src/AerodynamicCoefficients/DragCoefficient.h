@@ -1,23 +1,25 @@
 #ifndef DRAGCOEFFICIENT_H
 #define DRAGCOEFFICIENT_H
+#include "../MultiVarFunction.h"
 
-class DragCoefficient
+class DragCoefficient : public MultiVarFunction
 {
 public:
-    DragCoefficient(double CD0, double CDAlfa)
+    DragCoefficient(double CDmin, double k)
     :
-    cCD0(CD0),
-    cCDAlfa(CDAlfa){}
-    ~DragCoefficient(){}
+    MultiVarFunction(1),
+    cCDMin(CDmin),
+    cK(k){};
+    ~DragCoefficient(){};
 
-    inline double operator ()(double alfa) const
+    inline double operator ()(const std::vector<double>& CL) const override
     {
-        return cCD0 + (cCDAlfa*alfa);
+        return cCDMin + (cK*CL[0]*CL[0]);
     }
 
 private:
-    const double cCD0;
-    const double cCDAlfa;
+    const double cCDMin;
+    const double cK;
 };
 
 #endif
