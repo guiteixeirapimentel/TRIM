@@ -10,7 +10,7 @@ public:
     ~StateDot(){};
 
 public:
-    // 0->u; 1->w; 2->q; 3->theta;
+    // 0->udot; 1->wdot; 2->qdot; 3->thetadot;
     std::vector<double> cStatesDot;
 };
 
